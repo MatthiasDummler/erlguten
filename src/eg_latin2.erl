@@ -50,6 +50,9 @@ utf8_to_il2 (228) -> {228, 'adieresis',    1.000, $a};
 utf8_to_il2 (214) -> {214, 'Odieresis',    1.000, $O};
 utf8_to_il2 (246) -> {246, 'odieresis',    1.000, $o};
 utf8_to_il2 (223) -> {223, 'germandbls',    1.000, $s};
+% Euro
+utf8_to_il2 (8364) -> {8364, 'euro',    1.000, $E};
+
 
 utf8_to_il2 (X)   -> {X,   '$IDENTITY', 1.000, undefined}.
 
