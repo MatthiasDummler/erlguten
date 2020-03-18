@@ -43,13 +43,13 @@ utf8_to_il2 (250) -> {250, 'uacute',    1.000, $u};
 utf8_to_il2 (211) -> {211, 'Oacute',    1.000, $O};
 utf8_to_il2 (243) -> {243, 'oacute',    1.000, $o};
 % German Umlauts
-utf8_to_il2 (220) -> {220, 'Uuml',    1.000, $U};
-utf8_to_il2 (252) -> {252, 'uuml',    1.000, $u};
-utf8_to_il2 (196) -> {196, 'Auml',    1.000, $A};
-utf8_to_il2 (228) -> {228, 'auml',    1.000, $a};
-utf8_to_il2 (214) -> {214, 'Ouml',    1.000, $O};
-utf8_to_il2 (246) -> {246, 'ouml',    1.000, $o};
-utf8_to_il2 (223) -> {223, 'szlig',    1.000, $s};
+utf8_to_il2 (220) -> {220, 'Udieresis',    1.000, $U};
+utf8_to_il2 (252) -> {252, 'udieresis',    1.000, $u};
+utf8_to_il2 (196) -> {196, 'Adieresis',    1.000, $A};
+utf8_to_il2 (228) -> {228, 'adieresis',    1.000, $a};
+utf8_to_il2 (214) -> {214, 'Odieresis',    1.000, $O};
+utf8_to_il2 (246) -> {246, 'odieresis',    1.000, $o};
+utf8_to_il2 (223) -> {223, 'germandbls',    1.000, $s};
 
 utf8_to_il2 (X)   -> {X,   '$IDENTITY', 1.000, undefined}.
 
