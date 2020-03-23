@@ -24,7 +24,7 @@ utf8_to_il2 (282) -> {204, 'Ecaron',    1.000, $E};
 utf8_to_il2 (352) -> {169, 'Scaron',    1.000, $S};
 utf8_to_il2 (268) -> {200, 'Ccaron',    1.000, $C};
 utf8_to_il2 (344) -> {216, 'Rcaron',    1.000, $R};
-%utf8_to_il2 (381) -> {174, 'Zcaron',    1.000, $Z};
+utf8_to_il2 (381) -> {174, 'Zcaron',    1.000, $Z};
 utf8_to_il2 (221) -> {221, 'Yacute',    1.000, $Y};
 utf8_to_il2 (193) -> {193, 'Aacute',    1.000, $A};
 utf8_to_il2 (205) -> {205, 'Iacute',    1.000, $I};
@@ -51,7 +51,7 @@ utf8_to_il2 (214) -> {214, 'Odieresis',    1.000, $O};
 utf8_to_il2 (246) -> {246, 'odieresis',    1.000, $o};
 utf8_to_il2 (223) -> {223, 'germandbls',    1.000, $s};
 % Registered (r)
-utf8_to_il2 (174) -> {174, 'registered',    1.000, $r};
+utf8_to_il2 (174) -> {128, 'registered',    2.000, $r};
 
 
 utf8_to_il2 (X)   -> {X,   '$IDENTITY', 1.000, undefined}.
