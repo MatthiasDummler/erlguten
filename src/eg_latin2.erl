@@ -51,7 +51,7 @@ utf8_to_il2 (214) -> {214, 'Odieresis',    1.000, $O};
 utf8_to_il2 (246) -> {246, 'odieresis',    1.000, $o};
 utf8_to_il2 (223) -> {223, 'germandbls',    1.000, $s};
 % Registered (r)
-utf8_to_il2 (174) -> {128, 'registered',    2.000, $r};
+utf8_to_il2 (174) -> {128, 'registered',    2.200, $r};
 
 
 utf8_to_il2 (X)   -> {X,   '$IDENTITY', 1.000, undefined}.
