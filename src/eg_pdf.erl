@@ -279,8 +279,8 @@ get_string_width(_PID, Fontname, PointSize, Str)->
 get_string_width(Fontname, PointSize, Str)->
     {richText, Inline} = eg_richText:str2richText(Fontname, PointSize, 
 						  0, default, true, Str),
-    trunc(lists:foldl(fun(A, Accu) -> eg_richText:width(A) + Accu end, 
-		      0, Inline) /1000).
+    lists:foldl(fun(A, Accu) -> eg_richText:width(A) + Accu end, 
+		      0, Inline) /1000.
 
 %% units of measure
 
