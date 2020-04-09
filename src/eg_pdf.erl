@@ -31,7 +31,7 @@
          begin_text/1,
          bezier/5, bezier/9, bezier_c/4, bezier_v/3, bezier_y/3,
          break_text/1,
-         circle/3,
+         circle/3, circle/4,
          cms/1,
          color/1,
          default_face/0,
