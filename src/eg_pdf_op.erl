@@ -234,7 +234,8 @@ ellipse({X, Y}, {RX, RY})->
     bezier_c({X+RX,       Y+RY*mpo()}, {X+RX*mpo(), Y+RY      }, {X,    Y+RY}),
     bezier_c({X-RX*mpo(), Y+RY      }, {X-RX,       Y+RY*mpo()}, {X-RX, Y   }),
     bezier_c({X-RX,       Y-RY*mpo()}, {X-RX*mpo(), Y-RY      }, {X,    Y-RY}),
-    bezier_c({X+RX*mpo(), Y-RY      }, {X+RX,       Y-RY*mpo()}, {X+RX, Y   })
+    bezier_c({X+RX*mpo(), Y-RY      }, {X+RX,       Y-RY*mpo()}, {X+RX, Y   }),
+    path(close_stroke)
   ] .
 
 mpo()-> 0.552284749.   %% MultiPlier Object :-)
