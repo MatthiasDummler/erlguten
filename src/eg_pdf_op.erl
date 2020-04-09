@@ -226,17 +226,18 @@ bezier_y({X1, Y1}, {X3, Y3})->
 arc(_X1, _Y1, _X2, _Y2)->
     tobedone.
 
-circle({X,Y}, R)->
-    ellipse({X,Y}, {R,R}).
-    
-ellipse({X, Y}, {RX, RY})->
+circle(Pos, R)-> ellipse(Pos, {R, R}).
+circle(Pos, R, PathMode)-> ellipse(Pos, {R, R}, PathMode).
+ 
+ellipse(Pos, Radius) -> ellipse(Pos, Radius, close_stroke).
+ellipse({X, Y}, {RX, RY}, PathMode) ->
   [ move_to({X+RX, Y}),
     bezier_c({X+RX,       Y+RY*mpo()}, {X+RX*mpo(), Y+RY      }, {X,    Y+RY}),
     bezier_c({X-RX*mpo(), Y+RY      }, {X-RX,       Y+RY*mpo()}, {X-RX, Y   }),
     bezier_c({X-RX,       Y-RY*mpo()}, {X-RX*mpo(), Y-RY      }, {X,    Y-RY}),
     bezier_c({X+RX*mpo(), Y-RY      }, {X+RX,       Y-RY*mpo()}, {X+RX, Y   }),
-    path(close_stroke)
-  ] .
+    path(PathMode)
+  ].
 
 mpo()-> 0.552284749.   %% MultiPlier Object :-)
 
