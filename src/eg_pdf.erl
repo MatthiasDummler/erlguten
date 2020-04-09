@@ -386,6 +386,8 @@ bezier_y(PID, Point1, Point3)->
 
 circle(PID, {X,Y}, R)->
     append_stream(PID, eg_pdf_op:circle( {X,Y}, R)).
+circle(PID, {X,Y}, R, PathMode)->
+    append_stream(PID, eg_pdf_op:circle( {X,Y}, R, PathMode)).
 
 ellipse(PID, {X, Y}, {RX, RY})->
     append_stream(PID, eg_pdf_op:ellipse({X, Y}, {RX, RY})).
