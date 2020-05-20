@@ -214,9 +214,12 @@ width_of(Font, PointSize, Str) ->
 sizeof(Font, Str) ->
     Widths = lists:map(fun(I) -> char_width(Font, I) end, Str),
     %% dbg_io("Str=|~s| Widths=~p~nFont=~p~n",[Str, Widths, Font]),
-    W1 = lists:sum(Widths),
+    lists:sum(Widths).
+    %% Disabled kerning calculation to match the rendered text
+    %% before text width didn't always match actual rendered text width
+    %W1 = lists:sum(Widths).
     %% and add the correct kerning info
-    kern_adj(Str, W1, Font).
+    %kern_adj(Str, W1, Font).
 
 char_width(Font, I) ->
     case Font:width(I) of
