@@ -522,6 +522,7 @@ image(PID, FilePath)->
     save_state(PID),
     case image1(PID, FilePath, {size,{undefined,undefined}}) of
 	{error, Reason} -> 
+	    restore_state(PID),
 	    {error, Reason};
 	ok ->
 	    restore_state(PID)
@@ -531,6 +532,7 @@ image(PID, FilePath, Size)->
     save_state(PID),
     case image1(PID, FilePath, Size) of
 	{error, Reason} ->
+	    restore_state(PID),
 	    {error, Reason};
 	ok ->
 	    restore_state(PID)
@@ -541,6 +543,7 @@ image(PID, FilePath, {X,Y}, Size)  ->
     translate(PID,X,Y),
     case image1(PID, FilePath, Size) of
 	{error, Reason} -> 
+	    restore_state(PID),
 	    {error, Reason};
 	ok ->
 	    restore_state(PID)
