@@ -57,7 +57,8 @@
 	  scripts=[],
 	  mediabox,
     convertMode,
-	  procset={undefined,undefined}  %% { imageb,imagec }
+	  procset={undefined,undefined},  %% { imageb,imagec }
+	  additional_data = #{} %% runtime only data, not displayed on PDF
 	 }).
 
 
