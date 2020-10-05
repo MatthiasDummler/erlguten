@@ -1,113 +1,101 @@
 %%%-------------------------------------------------------------------
 %%% File    : eg_pdf.erl
 %%% Author  :  <wright@servicelevel.net>
-%%% Description : 
-%%%
+%%% Description : Generate PDF documents main api
 %%% Created : 25 April 2010 by  <wright@servicelevel.net>
 %%%-------------------------------------------------------------------
 -module(eg_pdf).
-
 -behaviour(gen_server).
 
 %% API
-
-
 -define(SERVER, eg_pdf).
-
-%% gen_server callbacks
--export([init/1, handle_call/3, handle_cast/2, handle_info/2,
-   terminate/2, code_change/3, start_link/1]).
-
-
-
-%% Purpose: Generate PDF documents main api
+-export([init/1, handle_call/3, handle_cast/2, handle_info/2, terminate/2, code_change/3, start_link/1]).
 
 -include("../include/eg.hrl").
-
--export([add_start_xref/2,
-	 add_trailer/4,
-	 add_xref/2,
-	 append_stream/2,
-         begin_text/1,
-         bezier/5, bezier/9, bezier_c/4, bezier_v/3, bezier_y/3,
-         break_text/1,
-         circle/3, circle/4,
-         cms/1,
-         color/1,
-         default_face/0,
-         delete/1,
-         ellipse/3,
-         end_text/1,
-         ensure_font_gets_loaded/2,
-         export/1,
-         inches/1,
-         get_page_no/1,
-         get_state/1,
-         get_string_width/3, get_string_width/4,
-         grid/3,
-	 header/0,
-         image/2, image/3, image/4,
-         inBuiltFonts/0,
-         kernedtext/2,
-         line/2, line/3, line/5,
-         lines/2,
-         mirror_xaxis/2, mirror_yaxis/2,
-         move_to/2,
-         new/0,
-         new_page/1,
-         page_script/2,
-         pagesize/1, pagesize/2,
-         path/2,
-         picas/1,
-         points/1,
-         poly/2,
-         rectangle/3, rectangle/4, rectangle/5, rectangle/6,
-         restore_state/1,
-         rotate/2,
-         round_rect/4,
-         round_top_rect/4,
-         save_state/1,
-         scale/3,
-         set_author/2,
-         set_char_space/2,
-         set_creator/2,
-         set_dash/2, set_dash/3,
-         set_date/4,
-         set_fill_color/2, set_fill_color_CMYK/5, set_fill_color_RGB/4,
-         set_fill_gray/2,
-         set_font/3,
-         set_keywords/2,
-         set_line_cap/2,
-         set_line_join/2,
-         set_line_width/2,
-         set_miter_limit/2,
-         set_page/2,
-         set_pagesize/2, set_pagesize/3,
-         set_producer/2,
-         set_stroke_color/2, set_stroke_color_CMYK/5, set_stroke_color_RGB/4,
-         set_stroke_gray/2,
-         set_subject/2,
-         set_text_leading/2,
-         set_text_pos/3,
-         set_text_rendering/2,
-         set_text_rise/2,
-         set_text_scale/2,
-         set_title/2,
-         set_word_space/2,
-         skew/3,
-         text/2,
-         text_rotate/2,
-         text_rotate_position/4,
-         textbr/2,
-         text_transform/7,
-         transform/7, 
-	 translate/3,
-	 xref/2
-        ]).
-
+-export([
+    add_start_xref/2,
+    add_trailer/4,
+    add_xref/2,
+    append_stream/2,
+    begin_text/1,
+    bezier/5, bezier/9, bezier_c/4, bezier_v/3, bezier_y/3,
+    break_text/1,
+    circle/3, circle/4,
+    cms/1,
+    color/1,
+    default_face/0,
+    delete/1,
+    ellipse/3,
+    end_text/1,
+    ensure_font_gets_loaded/2,
+    export/1,
+    inches/1,
+    get_page_no/1,
+    get_state/1,
+    get_string_width/3, get_string_width/4,
+    grid/3,
+    header/0,
+    image/2, image/3, image/4,
+    inBuiltFonts/0,
+    kernedtext/2,
+    line/2, line/3, line/5,
+    lines/2,
+    mirror_xaxis/2, mirror_yaxis/2,
+    move_to/2,
+    new/0,
+    new_page/1,
+    page_script/2,
+    pagesize/1, pagesize/2,
+    path/2,
+    picas/1,
+    points/1,
+    poly/2,
+    rectangle/3, rectangle/4, rectangle/5, rectangle/6,
+    restore_state/1,
+    rotate/2,
+    round_rect/4,
+    round_top_rect/4,
+    save_state/1,
+    scale/3,
+    set_author/2,
+    set_char_space/2,
+    set_creator/2,
+    set_dash/2, set_dash/3,
+    set_date/4,
+    set_fill_color/2, set_fill_color_CMYK/5, set_fill_color_RGB/4,
+    set_fill_gray/2,
+    set_font/3,
+    set_keywords/2,
+    set_line_cap/2,
+    set_line_join/2,
+    set_line_width/2,
+    set_miter_limit/2,
+    set_page/2,
+    set_pagesize/2, set_pagesize/3,
+    set_producer/2,
+    set_stroke_color/2, set_stroke_color_CMYK/5, set_stroke_color_RGB/4,
+    set_stroke_gray/2,
+    set_subject/2,
+    set_text_leading/2,
+    set_text_pos/3,
+    set_text_rendering/2,
+    set_text_rise/2,
+    set_text_scale/2,
+    set_title/2,
+    set_word_space/2,
+    skew/3,
+    text/2,
+    text_rotate/2,
+    text_rotate_position/4,
+    textbr/2,
+    text_transform/7,
+    transform/7, 
+    translate/3,
+    xref/2,
+    set_additional_data/3, get_additional_data/2
+]).
 
 %% Set up Info, Catalog and Pages
-
 init_pdf_context()->
     {{Year,Month,Day},{Hrs,Min,Sec}} = calendar:local_time(),
     #pdfContext{info=#info{creator="Erlang", 
@@ -134,12 +122,10 @@ new()->
 %% @doc Export to PDF file format 
 %% return: {PDFDoc::binary(), PageNo::integer()} | exit(Reason)
 export(PID)->
-  case gen_server:call(PID, {export}, infinity) of
-  	{export, PDFDoc, PageNo}->
-  	    {PDFDoc, PageNo};
-  	{'EXIT', PID, Reason} ->
-  	    exit(Reason)
-  end.
+    case gen_server:call(PID, {export}, infinity) of
+        {export, PDFDoc, PageNo} -> {PDFDoc, PageNo};
+        {'EXIT', PID, Reason} -> exit(Reason)
+    end.
 
 %% @doc clear up - delete pdf building process
 delete(PID)->
@@ -148,20 +134,24 @@ delete(PID)->
 %% @doc return the state of the server
 
 get_state(PID) ->
-  gen_server:call(PID, {get_state}).
+    gen_server:call(PID, {get_state}).
+
+set_additional_data(PID, Key, Value) ->
+    gen_server:cast(PID, {set_additional_data, Key, Value}).
+
+get_additional_data(PID, Key) ->
+    gen_server:call(PID, {get_additional_data, Key}).
 
 %% @doc Add current page context to PDF document and start on a new page 
 %% Note page 1 is already created  by default and  current page set 
 %% to it after creation of PDF context.
 new_page(PID)->
-   case gen_server:call( PID, {get_new_page}, infinity) of
+    case gen_server:call( PID, {get_new_page}, infinity) of
     	{page,PageNo}->
     	    PageNo;
     	{'EXIT', PID, Reason} ->
     	    exit(Reason)
     end.
-
-
 
 page_script(PID, Script) ->
     gen_server:cast(PID, {page_script, Script}).
@@ -661,8 +651,11 @@ handle_call({export}, _From, [PDFC, Stream]) ->
       	    end,
 	    {reply, {export, PDF, PageNo}, [PDFC, Stream]};
 	    
-handle_call({get_state}, _From, [PDFC, Stream]) ->	        
-	    {reply, [PDFC, Stream], [PDFC, Stream]}.
+handle_call({get_state}, _From, [PDFC, Stream]) ->
+	    {reply, [PDFC, Stream], [PDFC, Stream]};
+	    
+handle_call({get_additional_data, Key}, _From, [PDFC, Stream]) ->
+	    {reply, maps:find(Key, PDFC#pdfContext.additional_data), [PDFC, Stream]}.
 
 
 %%--------------------------------------------------------------------
@@ -673,53 +666,51 @@ handle_call({get_state}, _From, [PDFC, Stream]) ->
 %%--------------------------------------------------------------------
 	    	    
 handle_cast({mediabox, Mediabox}, [PDFC, Stream]) ->	
-	    {noreply, [PDFC#pdfContext{mediabox=Mediabox}, Stream]};
+    {noreply, [PDFC#pdfContext{mediabox=Mediabox}, Stream]};
 	    	    
 handle_cast({delete},  [PDFC, Stream]) ->	
-	    {stop, normal, [PDFC, Stream]};
+    {stop, normal, [PDFC, Stream]};
 	    	    
 handle_cast({font, {set, Fontname, Size}}, [PDFC, Stream]) ->	
-      {F,Alias,Fhand} = handle_setfont(PDFC#pdfContext.fonts, Fontname),
-      S = list_to_binary(eg_pdf_op:set_font_by_alias(Alias, Size)),
-      Binary = <<Stream/binary, S/binary>>,
-      {noreply, [PDFC#pdfContext{fonts=F,font_handler=Fhand}, Binary]};
-      
+    {F,Alias,Fhand} = handle_setfont(PDFC#pdfContext.fonts, Fontname),
+    S = list_to_binary(eg_pdf_op:set_font_by_alias(Alias, Size)),
+    Binary = <<Stream/binary, S/binary>>,
+    {noreply, [PDFC#pdfContext{fonts=F,font_handler=Fhand}, Binary]};
+
 handle_cast({info,Info}, [PDFC, Stream]) ->	      
-	    NewInfo = pdf_handle_info(PDFC#pdfContext.info, Info),
-	    {noreply,  [PDFC#pdfContext{info=NewInfo}, Stream]};
+    NewInfo = pdf_handle_info(PDFC#pdfContext.info, Info),
+    {noreply,  [PDFC#pdfContext{info=NewInfo}, Stream]};
 	          
 handle_cast({stream, {append, String}}, [PDFC, Stream]) ->	    
-	    B = case PDFC#pdfContext.convertMode of
+    B = case PDFC#pdfContext.convertMode of
         'utf8_to_latin2' -> list_to_binary(eg_latin2:encode_from_utf8(String));
-        _                -> list_to_binary(convert(PDFC#pdfContext.font_handler, String))
-      end,
-	    Binary = <<Stream/binary, B/binary, <<" ">>/binary>>,
-	    {noreply, [PDFC, Binary]};
+        _ -> list_to_binary(convert(PDFC#pdfContext.font_handler, String))
+    end,
+    Binary = <<Stream/binary, B/binary, <<" ">>/binary>>,
+    {noreply, [PDFC, Binary]};
 	     
 handle_cast({image, FilePath, Size}, [PDFC, Stream]) ->	    
-	    {I,IMG,{W,H},ProcSet} = handle_image(PDFC#pdfContext.images, 
-						 FilePath, Size, 
-						 PDFC#pdfContext.procset),
-	    S = list_to_binary(eg_pdf_op:set_image(W,H, IMG)),
-	    Binary = <<Stream/binary, S/binary>>,
-	    {noreply, [PDFC#pdfContext{images=I,procset=ProcSet}, Binary]};	    
+    {I,IMG,{W,H},ProcSet} = handle_image(PDFC#pdfContext.images, FilePath, Size, PDFC#pdfContext.procset),
+    S = list_to_binary(eg_pdf_op:set_image(W,H, IMG)),
+    Binary = <<Stream/binary, S/binary>>,
+    {noreply, [PDFC#pdfContext{images=I,procset=ProcSet}, Binary]};	    
     
 handle_cast({page_script, Script}, [PDFC, Stream]) ->	
-	    %% io:format("New script ~p\n", [Script]),
-	    NewScript = handle_pagescript(PDFC#pdfContext.scripts,
-					  PDFC#pdfContext.currentpage,
-					  Script),
-	    {noreply, [PDFC#pdfContext{scripts=NewScript}, Stream]};
+    %% io:format("New script ~p\n", [Script]),
+    NewScript = handle_pagescript(PDFC#pdfContext.scripts, PDFC#pdfContext.currentpage, Script),
+    {noreply, [PDFC#pdfContext{scripts=NewScript}, Stream]};
 
 handle_cast({page,{set,PageNo}}, [PDFC, Stream]) ->	
-	    {NewPages,[NewStream]} = handle_setpage(PDFC#pdfContext.pages,PageNo,
-						  PDFC#pdfContext.currentpage, 
-						  [Stream]),
-	    {noreply, [PDFC#pdfContext{pages=NewPages,currentpage=PageNo}, NewStream]};	    
+    {NewPages,[NewStream]} = handle_setpage(PDFC#pdfContext.pages, PageNo, PDFC#pdfContext.currentpage, [Stream]),
+    {noreply, [PDFC#pdfContext{pages=NewPages,currentpage=PageNo}, NewStream]};	    
   
 handle_cast({ensure_font, Fontname}, [PDFC, Stream]) ->	      
-	    F = ensure_font( eg_font_map:handler(Fontname), PDFC#pdfContext.fonts),
-	    {noreply, [PDFC#pdfContext{fonts=F}, Stream]}.
+    F = ensure_font( eg_font_map:handler(Fontname), PDFC#pdfContext.fonts),
+    {noreply, [PDFC#pdfContext{fonts=F}, Stream]};
+	    
+handle_cast({set_additional_data, Key, Value}, [PDFC, Stream]) ->
+    NewData = maps:put(Key, Value, PDFC#pdfContext.additional_data),
+    {noreply, [PDFC#pdfContext{additional_data = NewData}, Stream]}.
 	    
 %%--------------------------------------------------------------------
 %% Function: handle_info(Info, State) -> {noreply, State} |
