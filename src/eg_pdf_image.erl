@@ -38,7 +38,9 @@
         get_png_content/1,
         deflate_stream/1,
         inflate_stream/1]).
--compile(export_all).
+%-compile(export_all).
+%apr: make compiler happy.
+-compile({no_auto_import,[floor/1]}).
 -include("../include/eg.hrl").
 
 %% ============================================================================

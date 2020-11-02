@@ -126,7 +126,7 @@ table(PDF, Rows, X, Width, Start, Bottom, FontSize,FontChoice) ->
     S0 = #st{y=Start, min_y = Bottom },
     S = space_before(10, S0),
     Cols = max_length(Rows,0),      % Number of cols is max cols of all rows.
-    Col_width = Width div Cols,
+    %Col_width = Width div Cols,
     W = Width - 5*Cols,
 
     RTF_words = lists:map(fun(Row) -> 
@@ -145,7 +145,7 @@ table(PDF, Rows, X, Width, Start, Bottom, FontSize,FontChoice) ->
                       [Min_tab_width div Cols + Cols]);
        true -> ok
     end,
-    _Text_width = Col_width - 4 - 1, % leave space for lines + ws
+    %_Text_width = Col_width - 4 - 1, % leave space for lines + ws
 
     %% Sum the total length of text in each column. This gives a
     %% general measure of the size of a column.

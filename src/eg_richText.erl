@@ -230,11 +230,11 @@ char_width(Font, I) ->
 	    Font:width($\s)
     end.
 
-kern_adj([H1,H2|T], W, Font) ->
-    Extra = Font:kern(H1, H2),
-    kern_adj([H2|T], W+Extra, Font);
-kern_adj(_, W, _) ->
-    W.
+%kern_adj([H1,H2|T], W, Font) ->
+%    Extra = Font:kern(H1, H2),
+%    kern_adj([H2|T], W+Extra, Font);
+%kern_adj(_, W, _) ->
+%    W.
 
 %%----------------------------------------------------------------------
 %% access funtions
