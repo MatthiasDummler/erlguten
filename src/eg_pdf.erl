@@ -797,7 +797,7 @@ mkPageTree(L, Fonts, XObjects, _MediaBox = {A,B,C,D}, ProcSet ) ->
 		    {_,imagec} -> [{name, "ImageC"}];
 		    _ -> []
 		end,
-    {dict,[{"Type",{name,"Page"}},
+    {dict,[{"Type",{name,"Pages"}},
 	   {"Count",length(L)},
 	   {"MediaBox", {array,[A,B,C,D]}},
 	   {"Kids",{array,lists:map(fun(I) ->{ptr,I,0} end,L)}},
