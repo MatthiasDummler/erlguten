@@ -130,7 +130,7 @@ page_tree(KidRefs, FontsPtr, XObjectsPtr, MediaBox = {rect, {_A, _B, _C, _D}},
 		    imagec -> [{name, "ImageC"}];
 		    _ -> []
 		end,
-    {dict,[{"Type",{name,"Page"}},
+    {dict,[{"Type",{name,"Pages"}},
 	   {"Count",length(KidRefs)},
 	   {"MediaBox", MediaBox },
 	   {"Kids",{array, lists:map(fun(I) ->{ptr,I,0} end, KidRefs)}},
