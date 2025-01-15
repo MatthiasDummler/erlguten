@@ -5,7 +5,7 @@
 -export([encoding/0]).
 fontName() -> "Helvetica".
 index() -> 7.
-type() -> internal.
+type() -> external.
 encoding() -> "AdobeStandardEncoding".
 firstChar() ->32.
 lastChar() ->255.
