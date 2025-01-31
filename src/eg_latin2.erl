@@ -29,7 +29,6 @@ utf8_to_il2 (221) -> {221, 'Yacute',    1.000, $Y};
 utf8_to_il2 (193) -> {193, 'Aacute',    1.000, $A};
 utf8_to_il2 (205) -> {205, 'Iacute',    1.000, $I};
 utf8_to_il2 (201) -> {201, 'Eacute',    1.000, $E};
-
 utf8_to_il2 (356) -> {141, 'Tcaron',    1.000, $T};
 utf8_to_il2 (357) -> {157, 'tcaron',    1.200, $t};
 utf8_to_il2 (270) -> {207, 'Dcaron',    1.000, $D};
@@ -42,6 +41,7 @@ utf8_to_il2 (218) -> {218, 'Uacute',    1.000, $U};
 utf8_to_il2 (250) -> {250, 'uacute',    1.000, $u};
 utf8_to_il2 (211) -> {211, 'Oacute',    1.000, $O};
 utf8_to_il2 (243) -> {243, 'oacute',    1.000, $o};
+
 % German Umlauts
 utf8_to_il2 (220) -> {220, 'Udieresis',    1.000, $U};
 utf8_to_il2 (252) -> {252, 'udieresis',    1.000, $u};
@@ -49,10 +49,14 @@ utf8_to_il2 (196) -> {196, 'Adieresis',    1.000, $A};
 utf8_to_il2 (228) -> {228, 'adieresis',    1.000, $a};
 utf8_to_il2 (214) -> {214, 'Odieresis',    1.000, $O};
 utf8_to_il2 (246) -> {246, 'odieresis',    1.000, $o};
-utf8_to_il2 (223) -> {223, 'germandbls',    1.000, $s};
+utf8_to_il2 (223) -> {223, 'germandbls',    1.000, $Z};
+
 % Registered (r)
 utf8_to_il2 (174) -> {128, 'registered',    2.200, $r};
 
+% En-dash and Em-dash fallbacks
+utf8_to_il2 (8211) -> {45, 'endash',    1.000, $-};
+utf8_to_il2 (8212) -> {45, 'emdash',    1.000, $-};
 
 utf8_to_il2 (X)   -> {X,   '$IDENTITY', 1.000, undefined}.
 
