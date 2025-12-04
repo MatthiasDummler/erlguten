@@ -43,20 +43,25 @@ utf8_to_il2 (211) -> {211, 'Oacute',    1.000, $O};
 utf8_to_il2 (243) -> {243, 'oacute',    1.000, $o};
 
 % German Umlauts
-utf8_to_il2 (220) -> {220, 'Udieresis',    1.000, $U};
-utf8_to_il2 (252) -> {252, 'udieresis',    1.000, $u};
-utf8_to_il2 (196) -> {196, 'Adieresis',    1.000, $A};
-utf8_to_il2 (228) -> {228, 'adieresis',    1.000, $a};
-utf8_to_il2 (214) -> {214, 'Odieresis',    1.000, $O};
-utf8_to_il2 (246) -> {246, 'odieresis',    1.000, $o};
+utf8_to_il2 (220) -> {220, 'Udieresis',     1.000, $U};
+utf8_to_il2 (252) -> {252, 'udieresis',     1.000, $u};
+utf8_to_il2 (196) -> {196, 'Adieresis',     1.000, $A};
+utf8_to_il2 (228) -> {228, 'adieresis',     1.000, $a};
+utf8_to_il2 (214) -> {214, 'Odieresis',     1.000, $O};
+utf8_to_il2 (246) -> {246, 'odieresis',     1.000, $o};
 utf8_to_il2 (223) -> {223, 'germandbls',    1.000, $Z};
 
 % Registered (r)
 utf8_to_il2 (174) -> {128, 'registered',    2.200, $r};
 
-% En-dash and Em-dash fallbacks
-utf8_to_il2 (8211) -> {45, 'endash',    1.000, $-};
-utf8_to_il2 (8212) -> {45, 'emdash',    1.000, $-};
+% En-dash & Em-dash
+utf8_to_il2 (8211) -> {150, 'endash',       1.000, $n};
+utf8_to_il2 (8212) -> {151, 'emdash',       1.200, $m};
+
+% Fractions
+utf8_to_il2 (274) -> {188, 'onequarter',    1.000, $M};
+utf8_to_il2 (275) -> {189, 'onehalf',       1.000, $M};
+utf8_to_il2 (276) -> {190, 'threequarters', 1.000, $M};
 
 utf8_to_il2 (X)   -> {X,   '$IDENTITY', 1.000, undefined}.
 
@@ -102,9 +107,12 @@ gen_diffs () ->
     {array, lists:flatten (R)}.
 
 supported_utf8_chars () ->
-    [283,353,269,345,382,253,225,237,233,
-     282,352,268,344,381,221,193,205,201,
-     356,357,270,271,327,328,336,367,218,250,211,243,
-     220,252,196,228,214,246,223,174].
+    [
+        283,353,269,345,382,253,225,237,233,282,352,268,344,381,221,193,205,201,356,357,270,271,327,328,336,367,218,250,211,243,
+        220,252,196,228,214,246,223, % German Umlauts
+        174, % Registered (r)
+        8211,8212, % En-dash & Em-dash
+        274,275,276 % Fractions
+    ].
 
 %% vim: fdm=syntax:fdn=3:tw=74:ts=2:syn=erlang
